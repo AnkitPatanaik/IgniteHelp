@@ -1,7 +1,8 @@
-var API_KEY = '12286b90480b8599e5a08ffbf87d0caf'
+//my api key
+var API_KEY = '12286b90480b8599e5a08ffbf87d0caf' //to hit The Movie Database API
+//import packages
 var http = require("https");
 var request = require('request'); //Makes it easy for us to get or post to different urls
-
 var express = require('express')
 app = express();
 
