@@ -1,23 +1,26 @@
-var TmdbApi = require('tmdb-node')
-var api = new TmdbApi('12286b90480b8599e5a08ffbf87d0caf') //Will throw an error if a key isn't supplied
+var TmdbApi = require('tmdb-node');
+var api = new TmdbApi('12286b90480b8599e5a08ffbf87d0caf'); //Will throw an error if a key isn't supplied
 
-// var API_KEY = '12286b90480b8599e5a08ffbf87d0caf'
+var API_KEY = '12286b90480b8599e5a08ffbf87d0caf'
 
-// var http = require("https");
-// var request = require('request'); //Makes it easy for us to get or post to different urls
+var http = require("https");
+var request = require('request'); //Makes it easy for us to get or post to different urls
 
 var express = require('express')
 app = express();
 
 
 app.get('/genres', function (req, res) {
-	//the parameters for genre is a function that has two parameters,
+	//the parameters for genre is a function,
 	//the first, return err if there is an error
 	//the second, data, the response of a successful request
 	api.genres(function(err,data){ 
 	    console.log(data.genres[1].name); //parse json object to get name of a genre
 	    res.send(data.genres[1].name) //send the genre to html
 	});
+	api.search_movie(function(err, data) {
+		console.log(data);
+	})
 })
 
 // app.get('/movies', function (req, res) {
@@ -29,7 +32,7 @@ app.get('/genres', function (req, res) {
 //home page
 app.get('/', function (req, res) {
   res.send('Hello World!');
-  res.send(success);
+  //res.send(success);
 });
 
 //server is running

@@ -1,18 +1,20 @@
 //my api key
 var API_KEY = '12286b90480b8599e5a08ffbf87d0caf' //to hit The Movie Database API
+
 //import packages
 var http = require("https");
-var request = require('request'); //Makes it easy for us to get or post to different urls
-var express = require('express')
+var request =  require('request'); //Makes it easy for us to get or post to different urls
+var rp = require('request-promise');
+var express = require('express');
 app = express();
 
 
 //TODO -> first route
 app.get('/movies', function (req, res) {
-	var overview = getMovie("storks");
-	//console.log(req);
-	console.log("The overview of the movie is: " + overview);
-	res.send(overview);
+	var overview = getMovie("storks") 
+		//console.log(req);
+		console.log("The overview of the movie is: " + overview);
+		res.send(overview);
 })
 
 //home page
@@ -35,19 +37,44 @@ function getMovie(movie) {
 	   		query: movie,
 	     	language: 'en-US',
 	     	api_key: API_KEY},
-	  		headers: { 'content-type': 'application/json' 
+	  		headers: { 'content-type': 'application/json', 'User-Agent': 'Request-Promise'
 	  		},
 	  	body: {},
 	  	json: true };
 
-		request(options, function (error, response, body) {
-			if (error) throw new Error(error);
-				//body returns ALL results --> check it out by uncommenting below
-				//console.log(body);
-				  
-				//i just want the first one
-			  	console.log(body.results[0].overview);
-			  	response.send(body.results[0].overview);
+	  	return rp(options).then(
+	  		function (response, body) {
+				console.log(body.results[0].overview);
+				return body.results[0].overview;		
+			})
+	  		.catch(function(err) {
+				return err;
 			});
+
+			/*
+			function (body) {
+				console.log(body.results[0].overview);
+				return body.results[0].overview;
+			})
+			.catch(
+				function (err) {
+				// API call failed...
+			    return err;
+			});
+			*/
+
+	    //  request(options, 
+		// 	function (error, response, body) {
+		// 		if (error) {
+		// 			console.log("failed");
+		// 			throw new Error(error);
+		// 		}
+		// 		else {
+		// 			console.log("success");
+		// 			return body.results[0].overview;
+		// 		}
+		// 	}
+		// );
 }
 
+console.log("YO " + getMovie("Storks"));
