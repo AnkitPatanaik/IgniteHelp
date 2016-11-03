@@ -42,39 +42,19 @@ function getMovie(movie) {
 	  	body: {},
 	  	json: true };
 
-	  	return rp(options).then(
-	  		function (response, body) {
-				console.log(body.results[0].overview);
-				return body.results[0].overview;		
-			})
-	  		.catch(function(err) {
-				return err;
-			});
 
-			/*
-			function (body) {
-				console.log(body.results[0].overview);
-				return body.results[0].overview;
-			})
-			.catch(
-				function (err) {
-				// API call failed...
-			    return err;
-			});
-			*/
-
-	    //  request(options, 
-		// 	function (error, response, body) {
-		// 		if (error) {
-		// 			console.log("failed");
-		// 			throw new Error(error);
-		// 		}
-		// 		else {
-		// 			console.log("success");
-		// 			return body.results[0].overview;
-		// 		}
-		// 	}
-		// );
+	    request(options, 
+			function (error, response, body) {
+				if (error) {
+					console.log("failed");
+					throw new Error(error);
+				}
+				else {
+					console.log("success");
+					return body.results[0].overview;
+				}
+			}
+		);
 }
 
 console.log("YO " + getMovie("Storks"));
