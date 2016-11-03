@@ -43,20 +43,13 @@ function getMovie(movie) {
 	  	body: {},
 	  	json: true };
 
-		return rp(options).then(
-	  		function (response, body) {
-				console.log(body.results[0].overview);
-				//return body.results[0].overview;		
-			})
-	  		.catch(function(err) {
-				return err;
-			});
+		return rp(options) //return a promise
 }
 
-var x = getMovie("Storks");
-console.log(x);
-x.then(function(value) {
-	console.log(value)
+var x = getMovie("Storks"); //this is a promise
+
+x.then(function(value) {  //handle results of promise
+	console.log(value.results[0].overview)
   }, function(err) {
   	console.log(err);
 });
