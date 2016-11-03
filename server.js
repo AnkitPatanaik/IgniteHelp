@@ -3,6 +3,7 @@ var API_KEY = '12286b90480b8599e5a08ffbf87d0caf' //to hit The Movie Database API
 
 //import packages
 var http = require("https");
+var Promise = require("bluebird");
 var request =  require('request'); //Makes it easy for us to get or post to different urls
 var rp = require('request-promise');
 var express = require('express');
@@ -42,19 +43,22 @@ function getMovie(movie) {
 	  	body: {},
 	  	json: true };
 
-
-	    request(options, 
-			function (error, response, body) {
-				if (error) {
-					console.log("failed");
-					throw new Error(error);
-				}
-				else {
-					console.log("success");
-					return body.results[0].overview;
-				}
-			}
-		);
+		return rp(options).then(
+	  		function (response, body) {
+				console.log(body.results[0].overview);
+				//return body.results[0].overview;		
+			})
+	  		.catch(function(err) {
+				return err;
+			});
 }
 
-console.log("YO " + getMovie("Storks"));
+var x = getMovie("Storks");
+console.log(x);
+x.then(function(value) {
+	console.log(value)
+  }, function(err) {
+  	console.log(err);
+});
+
+//console.log("YO " + getMovie("Storks", test("ay it's me")));
