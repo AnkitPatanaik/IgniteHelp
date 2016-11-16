@@ -8,10 +8,15 @@ var rp = require('request-promise');
 var express = require('express');
 app = express();
 
+/*  a promise pretty much tells node.js to not panic that the data 
+	is not there it PROMISES it will come eventually */
 app.get('/movies', function (req, res) {
-	var overview = getMovie("storks") 
-	console.log("The overview of the movie is: " + overview);
-	res.send(overview);
+	//getMovie returns a promise
+	getMovie("storks").then(function(value) {  //handle results of promise
+		res.send(value.results[0].overview) //send that to the html page to render
+	  }, function(err) {
+	  	console.log(err);
+	});;
 })
 
 //home page
@@ -42,10 +47,12 @@ function getMovie(movie) {
 	return rp(options) //return a promise
 }
 
+//little chunk of code i was messing with to get the promise to work
+/*
 var x = getMovie("Storks"); //this is a promise
-
 x.then(function(value) {  //handle results of promise
 	console.log(value.results[0].overview)
   }, function(err) {
   	console.log(err);
 });
+*/
