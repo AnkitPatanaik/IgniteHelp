@@ -19,12 +19,12 @@
                 $('#button').click(function(e){
                     e.preventDefault();
                     
-                    var data = "helloworld"
-					console.log(data);
+                    var movieTitle = $('#movieField').val() //need the # to reference DOM element
+					console.log(movieTitle);
 					
 					$.ajax({
 						type: 'GET',
-						data: JSON.stringify(data),
+						data: JSON.stringify(movieTitle),
 				        contentType: 'application/json',
                         url: 'http://localhost:3000/movies',						
                         success: function(data) {
