@@ -1,17 +1,26 @@
 <html>
 	<head>
-		<title>jsonp test</title>
+		<title>Movie Search</title>
 		<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>		
-		
+    </head>
+
+    <body>
+    	<form>
+			Movie:<br>
+			<input type="text" id="movieField" value = "gladiator">
+			<br>
+			<input type="submit" id='button' value="Submit">
+		</form> 
+
+
+		<!-- Javascript goes below this -->
 		<script type="text/javascript">
             $(function(){				
                 $('#button').click(function(e){
                     e.preventDefault();
-                    console.log('select_link clicked');
-
-					var data = {};
-					data.title = "title";
-					data.message = "message";
+                    
+                    var data = "helloworld"
+					console.log(data);
 					
 					$.ajax({
 						type: 'GET',
@@ -19,21 +28,12 @@
 				        contentType: 'application/json',
                         url: 'http://localhost:3000/movies',						
                         success: function(data) {
-                            console.log('success');
-                            console.log(JSON.stringify(data));
+                            console.log("Summary: " + JSON.stringify(data));
                         }
                     });
 
                 });				
             });
         </script>
-    </head>
-    <body>
-    	<form>
-			First name:<br>
-			<input type="text" name="movieField" value="Mickey">
-			<br>
-			<input type="submit" id='button' value="Submit">
-		</form> 
             
     </body>
