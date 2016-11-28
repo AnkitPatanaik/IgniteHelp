@@ -6,7 +6,12 @@ var http = require("https");
 var request =  require('request'); //Makes it easy for us to get or post to different urls
 var rp = require('request-promise');
 var express = require('express');
+var bodyparser = require('body-parser');
 app = express();
+
+var workingDir = 'C:/Users/Ankit/Documents/GitHub/IgniteHelp';
+//This sets bodyParser to act as middleware and go over all requests sent to your server
+app.use(bodyparser.json());
 
 /*  a promise pretty much tells node.js to not panic that the data 
 	is not there it PROMISES it will come eventually */
@@ -16,8 +21,12 @@ app.get('/movies', function (req, res) {
 		res.send(value.results[0].overview) //send that to the html page to render
 	  }, function(err) {
 	  	console.log(err);
-	});;
-})
+	});
+});
+
+app.get('/test', function (req, res) {
+	res.sendFile(workingDir + '/views/movie.html');
+});
 
 //home page
 app.get('/', function (req, res) {
@@ -48,6 +57,7 @@ function getMovie(movie) {
 }
 
 //little chunk of code i was messing with to get the promise to work
+
 /*
 var x = getMovie("Storks"); //this is a promise
 x.then(function(value) {  //handle results of promise
