@@ -10,6 +10,11 @@
 			<input type="text" id="movieField" value = "gladiator">
 			<br>
 			<input type="submit" id='button' value="Submit">
+
+			<div class="results"></div>
+			<br>
+			<br>
+			<div id="movieposter"></div>
 		</form> 
 
 
@@ -32,19 +37,19 @@
 						}
 
 						$.ajax(settings).done(function (response) {
-						  console.log(response.results[0].overview);
-						});
-					
-					// $.ajax({
-					// 	type: 'GET',
-					// 	data: JSON.stringify(movieTitle),
-				 //        contentType: 'application/json',
-     //                    url: 'http://localhost:3000/movies',						
-     //                    success: function(data) {
-     //                        console.log("Summary: " + JSON.stringify(data));
-     //                    }
-     //                });
+							var overview = response.results[0].overview;
+							var poster = response.results[0].poster_path;
 
+						    //console.log(response.results[0].poster_path);
+						    var imgPath = "https://image.tmdb.org/t/p/w185/"+poster
+						    console.log(imgPath)
+
+						    $('.results').html(overview);
+						    var img=$("<img />").attr("src",imgPath);
+							img.appendTo($("#movieposter"));
+
+						    
+						});
                 });				
             });
         </script>
