@@ -20,14 +20,16 @@
 
 		<!-- Javascript goes below this -->
 		<script type="text/javascript">
+			//$ references jquery 
             $(function(){				
                 $('#button').click(function(e){
                     e.preventDefault();
                     
+                    //get the title from the input field box
                     var movieTitle = $('#movieField').val() //need the # to reference DOM element
 					console.log(movieTitle);
-					//$("#movieposter").remove()
 
+					//settings for the api request
 					var settings = {
 						  "async": true,
 						  "crossDomain": true,
@@ -37,20 +39,17 @@
 						  "data": "{}"
 						}
 
-						$.ajax(settings).done(function (response) {
-							var overview = response.results[0].overview;
-							var poster = response.results[0].poster_path;
+					$.ajax(settings).done(function (response) {
+						var overview = response.results[0].overview; //summary
+						var poster = response.results[0].poster_path; //poster picture
 
-						    var imgPath = "https://image.tmdb.org/t/p/w185/"+poster
-						    console.log(imgPath)
+					    var imgPath = "https://image.tmdb.org/t/p/w185/"+poster; //create the url for the image
+					    //console.log(imgPath)
 
-						    $('.results').html(overview);
-						    var img=$("<img />").attr("src",imgPath);
-						    $("#movieposter").empty()
-							img.appendTo($("#movieposter"));
-
-						    
-						});
+					    var img=$("<img />").attr("src",imgPath); //creates an "image"
+					    $("#movieposter").empty() //empties the dive where the image goes
+						img.appendTo($("#movieposter")); //adds the image to the div called movieposter
+					});
                 });				
             });
         </script>
