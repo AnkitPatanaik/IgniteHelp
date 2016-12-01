@@ -21,16 +21,29 @@
                     
                     var movieTitle = $('#movieField').val() //need the # to reference DOM element
 					console.log(movieTitle);
+
+					var settings = {
+						  "async": true,
+						  "crossDomain": true,
+						  "url": "https://api.themoviedb.org/3/search/movie?query=" + movieTitle + "&api_key=12286b90480b8599e5a08ffbf87d0caf",
+						  "method": "GET",
+						  "headers": {},
+						  "data": "{}"
+						}
+
+						$.ajax(settings).done(function (response) {
+						  console.log(response.results[0].overview);
+						});
 					
-					$.ajax({
-						type: 'GET',
-						data: JSON.stringify(movieTitle),
-				        contentType: 'application/json',
-                        url: 'http://localhost:3000/movies',						
-                        success: function(data) {
-                            console.log("Summary: " + JSON.stringify(data));
-                        }
-                    });
+					// $.ajax({
+					// 	type: 'GET',
+					// 	data: JSON.stringify(movieTitle),
+				 //        contentType: 'application/json',
+     //                    url: 'http://localhost:3000/movies',						
+     //                    success: function(data) {
+     //                        console.log("Summary: " + JSON.stringify(data));
+     //                    }
+     //                });
 
                 });				
             });
