@@ -15,7 +15,7 @@ app.use(bodyparser.json());
 
 /*  a promise pretty much tells node.js to not panic that the data 
 	is not there it PROMISES it will come eventually */
-app.get('/movies', function (req, res) {
+app.get('/oldMoviesRoute', function (req, res) {
 	//getMovie returns a promise
 	getMovie("storks").then(function(value) {  //handle results of promise
 		res.send(value.results[0].overview) //send that to the html page to render
@@ -24,7 +24,7 @@ app.get('/movies', function (req, res) {
 	});
 });
 
-app.get('/test', function (req, res) {
+app.get('/movies', function (req, res) {
 	res.sendFile(workingDir + '/views/movie.html');
 });
 
