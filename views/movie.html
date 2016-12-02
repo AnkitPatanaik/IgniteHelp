@@ -11,12 +11,11 @@
 			<br>
 			<input type="submit" id='button' value="Submit">
 
-			<div class="results"></div>
+			<div id="results"></div>
 			<br>
 			<br>
 			<div id="movieposter"></div>
 		</form> 
-
 
 		<!-- Javascript goes below this -->
 		<script type="text/javascript">
@@ -45,6 +44,7 @@
 
 					    var imgPath = "https://image.tmdb.org/t/p/w185/"+poster; //create the url for the image
 					    //console.log(imgPath)
+					    $("#results").text(overview);
 
 					    var img=$("<img />").attr("src",imgPath); //creates an "image"
 					    $("#movieposter").empty() //empties the dive where the image goes
