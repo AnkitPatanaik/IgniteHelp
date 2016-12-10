@@ -8,7 +8,7 @@ var rp = require('request-promise');
 var express = require('express');
 app = express();
 
-var workingDir = 'C:/Users/Ankit/Documents/GitHub/IgniteHelp';
+var workingDir = '/Users/ankit/dev/IgniteHelp';
 
 /*  a promise pretty much tells node.js to not panic that the data 
 	is not there it PROMISES it will come eventually */
